@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-04-19T21:00:00.000Z"
-last_activity: 2026-04-19 -- Phase 2 context gathered (auto mode)
+stopped_at: Phase 2 planned — ready to execute
+last_updated: "2026-04-19T21:30:00.000Z"
+last_activity: 2026-04-19 -- Phase 2 planning complete (3 plans, 3 waves)
 progress:
   total_phases: 6
   completed_phases: 0
-  total_plans: 5
+  total_plans: 8
   completed_plans: 4
-  percent: 80
+  percent: 50
 ---
 
 # Project State
@@ -70,7 +70,7 @@ None yet.
 
 ### Blockers/Concerns
 
-- Phase 2: Validate Wikimedia Structured Contents JSON API (beta) production readiness vs. `action=parse` before committing to parsing approach
+- ~~Phase 2: Validate Wikimedia Structured Contents JSON API (beta) production readiness vs. `action=parse`~~ — RESOLVED: Research confirmed `action=parse` with `prop=text|tocdata|revid` is the correct approach; Structured Contents API is beta and not production-ready
 - Phase 3: LLM prompt engineering for claim extraction is model-specific — benchmark harness must validate against at least two providers
 - Phase 5: Staleness polling frequency must be validated against 2026 MediaWiki rate limits
 - Phase 6: Manifest V3 service worker constraints and Chrome Web Store review process need verification
@@ -83,6 +83,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-19T21:00:00.000Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-wikipedia-ingestion/02-CONTEXT.md
+Last session: 2026-04-19T21:30:00.000Z
+Stopped at: Phase 2 planned — ready to execute
+Resume file: .planning/phases/02-wikipedia-ingestion/02-01-PLAN.md
