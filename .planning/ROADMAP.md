@@ -13,7 +13,7 @@ Rosetta is built in six phases following the hard dependency graph from the rese
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Foundation** - Database schema, pg-boss, LLM adapter layer, and reviewer authentication
-- [ ] **Phase 2: Wikipedia Ingestion** - MediaWiki API client, HTML parsing, stable paragraph ID generation
+- [x] **Phase 2: Wikipedia Ingestion** - MediaWiki API client, HTML parsing, stable paragraph ID generation (Completed 2026-04-19)
 - [ ] **Phase 3: AI Pipeline and Scoring** - Claim extraction, commentary drafting, Factual Score engine
 - [ ] **Phase 4: Reviewer Dashboard** - Five-state workflow, prioritized queue, source verification, audit log
 - [ ] **Phase 5: Public Site and Staleness** - Public article pages, side-by-side layout, staleness detection
@@ -111,7 +111,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/5 | Gap closure planned | - |
-| 2. Wikipedia Ingestion | 0/3 | Planned | - |
+| 2. Wikipedia Ingestion | 3/3 | Complete | 2026-04-19 |
 | 3. AI Pipeline and Scoring | 0/TBD | Not started | - |
 | 4. Reviewer Dashboard | 0/TBD | Not started | - |
 | 5. Public Site and Staleness | 0/TBD | Not started | - |
