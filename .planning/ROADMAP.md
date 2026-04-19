@@ -31,12 +31,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A pg-boss job can be enqueued, picked up by a worker, and completed with exactly-once delivery confirmed in tests
   4. Switching the active LLM provider (e.g., Claude to GPT-4) requires only a configuration change — no code changes
   5. All MediaWiki API requests include a descriptive User-Agent header per Wikimedia policy
-**Plans:** 4 plans
+**Plans:** 5 plans
 Plans:
 - [ ] 01-01-PLAN.md — Bootstrap Next.js project, Docker Compose, Drizzle schema with all domain tables
 - [ ] 01-02-PLAN.md — pg-boss job queue, AI provider registry, MediaWiki client with tests
 - [ ] 01-03-PLAN.md — NextAuth v5 authentication, login page, dashboard shell
 - [ ] 01-04-PLAN.md — Integration tests for schema integrity and credentials auth
+- [ ] 01-05-PLAN.md — Gap closure: fix getBoss() singleton, OAuth env guards, mediawikiFetch status check, worker batch guard
 **UI hint**: yes
 
 ### Phase 2: Wikipedia Ingestion
@@ -105,7 +106,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/4 | Planning complete | - |
+| 1. Foundation | 0/5 | Gap closure planned | - |
 | 2. Wikipedia Ingestion | 0/TBD | Not started | - |
 | 3. AI Pipeline and Scoring | 0/TBD | Not started | - |
 | 4. Reviewer Dashboard | 0/TBD | Not started | - |
