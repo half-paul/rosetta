@@ -650,22 +650,25 @@ export const ingestBodySchema = z.object({
 | A3 | URL normalization handles all Wikipedia URL variants (mobile, HTTP, encoded) | Code Examples | Edge cases may exist for special pages, section anchors in URL, international variants |
 | A4 | Section heading stack algorithm (level 2 resets stack) handles deeply nested headings | Code Examples | Articles with h4/h5 headings may produce unexpected paths |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **How to handle disambiguation pages**
    - What we know: Disambiguation pages have no prose paragraphs — they're lists of links. The parser will find no `<p>` elements with real content.
    - What's unclear: Should the ingestion job fail, succeed with 0 paragraphs, or detect the disambiguation class (`.disambig`) and reject at job time?
    - Recommendation: Claude's Discretion (from CONTEXT.md) — detect `#disambig` or `.disambiguation` class in JSDOM; if found, mark job as failed with reason "disambiguation page" and surface error to API caller.
+   - **RESOLVED:** Disambiguation pages will produce empty articles (0 paragraphs after filtering). The parser returns `sections.filter(s => s.paragraphs.length > 0)` which yields an empty array for disambiguation pages. This is acceptable — the article row is created with no sections/paragraphs, which is a valid state. No special detection needed in Phase 2; disambiguation detection can be added as a future enhancement if needed.
 
 2. **Should raw HTML be stored for debugging?**
    - What we know: The articles table has no `rawHtml` column in the existing schema.
    - What's unclear: Whether to add it or leave it out.
    - Recommendation: Claude's Discretion — do not store raw HTML by default (bloats DB); log to file or skip entirely in Phase 2.
+   - **RESOLVED:** Not storing raw HTML. No schema column exists and adding one is out of scope for Phase 2.
 
 3. **getBoss() start() lifecycle in API routes**
    - What we know: `src/lib/boss.ts` creates a PgBoss instance but does NOT call `boss.start()`. The worker process calls `start()` separately.
    - What's unclear: Whether `boss.send()` requires `boss.start()` to be called first in the API route context.
    - Recommendation: Check pg-boss docs for whether `send()` can be called without `start()`. If not, the API route needs a lazy-started boss. The planner should address this explicitly.
+   - **RESOLVED:** Plan 02-03 adds `getStartedBoss()` to `src/lib/boss.ts` which lazily calls `boss.start()` before returning the instance. The API route uses `getStartedBoss()` instead of `getBoss()`.
 
 ## Environment Availability
 
