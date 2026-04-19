@@ -1,4 +1,5 @@
 import { PgBoss } from 'pg-boss'
+import { runIngestionJob } from '@/features/ingestion/ingest-worker'
 
 async function startWorkers() {
   if (!process.env.DATABASE_URL) {
@@ -20,6 +21,21 @@ async function startWorkers() {
 
   // Dead-letter queue for failed jobs:
   await boss.createQueue('analysis-failures')
+
+  // Ingestion queue — processes Wikipedia article fetch+parse+persist jobs
+  await boss.createQueue('ingestion-jobs', {
+    retryLimit: 3,
+    retryDelay: 30,
+    retryBackoff: true,
+    expireInSeconds: 600,
+    deadLetter: 'ingestion-failures',
+  })
+  await boss.createQueue('ingestion-failures')
+
+  await boss.work('ingestion-jobs', async ([job]) => {
+    console.log(`Processing ingestion job ${job.id}`, job.data)
+    await runIngestionJob(job.data as { url: string; title: string })
+  })
 
   // Worker registration:
   await boss.work('analysis-jobs', async ([job]) => {
