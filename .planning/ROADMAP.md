@@ -49,7 +49,11 @@ Plans:
   2. The parsed article tree exposes each paragraph with a stable ID composed of section path + content hash + revision ID
   3. The ingestion client enforces sequential requests with exponential backoff on HTTP 429 responses
   4. Article metadata and parsed content are queryable from the database after ingestion completes
-**Plans**: TBD
+**Plans:** 3 plans
+Plans:
+- [ ] 02-01-PLAN.md — Install jsdom, create stable-id utilities, mediawiki backoff extension, mediawiki-client, unit tests
+- [ ] 02-02-PLAN.md — JSDOM HTML parser (parse-article.ts) with section walk algorithm, unit tests
+- [ ] 02-03-PLAN.md — Ingestion worker, POST /api/articles route, pg-boss queue wiring, schema push, integration tests
 
 ### Phase 3: AI Pipeline and Scoring
 **Goal**: Every ingested article's paragraphs are analyzed by the AI pipeline — claims extracted, commentary drafted with unverified sources, and a Factual Score computed that encodes human-review coverage as a hard constraint
@@ -107,7 +111,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/5 | Gap closure planned | - |
-| 2. Wikipedia Ingestion | 0/TBD | Not started | - |
+| 2. Wikipedia Ingestion | 0/3 | Planned | - |
 | 3. AI Pipeline and Scoring | 0/TBD | Not started | - |
 | 4. Reviewer Dashboard | 0/TBD | Not started | - |
 | 5. Public Site and Staleness | 0/TBD | Not started | - |
