@@ -82,7 +82,13 @@ Plans:
   3. A reviewer cannot approve commentary without first explicitly marking each cited source as verified — source verification is a mandatory, distinct UI step that the system enforces
   4. A reviewer can approve, edit, reject, or flag any word/sentence/paragraph/section for fact-checking — including content not flagged by the AI
   5. Every reviewer action (who, what, when, before/after) is written to an immutable audit log, and an alert fires when queue depth exceeds a configurable threshold
-**Plans**: TBD
+**Plans:** 5 plans
+Plans:
+- [ ] 04-01-PLAN.md — Schema extensions (audit_log, assignedTo, explanation), state machine, audit-log helper, TDD tests
+- [ ] 04-02-PLAN.md — Review action modules (approve/reject/edit/assign/flag/verify-source) and 6 API routes
+- [ ] 04-03-PLAN.md — Queue page with filters, queue-item rows, depth alert, shadcn components, nuqs
+- [ ] 04-04-PLAN.md — Review pane with split view, source checklist, commentary editor, flag form, activity feed
+- [ ] 04-05-PLAN.md — Activity page, schema push, full test suite, visual checkpoint
 **UI hint**: yes
 
 ### Phase 5: Public Site and Staleness
@@ -118,6 +124,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 1. Foundation | 0/5 | Gap closure planned | - |
 | 2. Wikipedia Ingestion | 3/3 | Complete | 2026-04-19 |
 | 3. AI Pipeline and Scoring | 4/4 | Complete | 2026-04-19 |
-| 4. Reviewer Dashboard | 0/TBD | Not started | - |
+| 4. Reviewer Dashboard | 0/5 | Planned | - |
 | 5. Public Site and Staleness | 0/TBD | Not started | - |
 | 6. Browser Extension | 0/TBD | Not started | - |
