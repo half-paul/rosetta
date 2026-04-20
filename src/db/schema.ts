@@ -5,6 +5,8 @@ import {
   timestamp,
   pgEnum,
   primaryKey,
+  real,
+  jsonb,
 } from 'drizzle-orm/pg-core'
 import { createId } from '@paralleldrive/cuid2'
 
@@ -132,6 +134,9 @@ export const claims = pgTable('claim', {
     .references(() => paragraphs.id, { onDelete: 'cascade' }),
   text: text('text').notNull(),
   severity: text('severity'), // nullable — populated in Phase 3
+  confidenceScore: real('confidence_score'), // nullable — per D-05, backward compatible
+  charOffsetStart: integer('char_offset_start'), // per D-05
+  charOffsetEnd: integer('char_offset_end'), // per D-05
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
@@ -144,6 +149,7 @@ export const commentaries = pgTable('commentary', {
     .references(() => claims.id, { onDelete: 'cascade' }),
   draftText: text('draft_text').notNull(),
   status: reviewStatusEnum('status').notNull().default('PENDING'),
+  suggestedSources: jsonb('suggested_sources'), // per D-07, stores array of {url, title, relevanceNote, isVerified: false}
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
@@ -174,6 +180,10 @@ export const scores = pgTable('score', {
   coveragePercent: integer('coverage_percent').notNull().default(0),
   totalParagraphs: integer('total_paragraphs').notNull().default(0),
   reviewedParagraphs: integer('reviewed_paragraphs').notNull().default(0),
+  coverageComponent: integer('coverage_component').notNull().default(0), // per D-09
+  accuracyComponent: integer('accuracy_component').notNull().default(0), // per D-11
+  confidenceComponent: integer('confidence_component').notNull().default(0), // per D-12
+  scoreWeightsConfig: jsonb('score_weights_config').notNull().default('{"coverage":0.4,"accuracy":0.4,"confidence":0.2}'), // per D-09/SCORE-04
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 })
