@@ -67,8 +67,8 @@ Plans:
   5. A benchmark harness can run claim extraction against at least two LLM providers and compare output quality
 **Plans:** 4 plans
 Plans:
-- [ ] 03-01-PLAN.md — Schema columns, Zod schemas, Factual Score engine with TDD
-- [ ] 03-02-PLAN.md — Claim extractor and commentary drafter LLM modules with unit tests
+- [x] 03-01-PLAN.md — Schema columns, Zod schemas, Factual Score engine with TDD
+- [x] 03-02-PLAN.md — Claim extractor and commentary drafter LLM modules with unit tests
 - [ ] 03-03-PLAN.md — Analysis worker, ingestion handoff, worker registration, schema push, integration tests
 - [ ] 03-04-PLAN.md — Benchmark harness CLI script with curated fixtures and output validation
 
