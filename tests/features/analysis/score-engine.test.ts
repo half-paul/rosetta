@@ -1,4 +1,13 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
+
+// Mock server-only (no Next.js runtime in tests)
+vi.mock('server-only', () => ({}))
+
+// Mock @/db to avoid requiring DATABASE_URL — pure function tests do not use DB
+vi.mock('@/db', () => ({
+  db: {},
+}))
+
 import { computeFactualScore, DEFAULT_WEIGHTS } from '@/features/analysis/score-engine'
 import type { ScoreWeights } from '@/features/analysis/score-engine'
 
