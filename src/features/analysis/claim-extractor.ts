@@ -42,7 +42,7 @@ If there are no check-worthy claims in the paragraph, return an empty claims arr
 export async function extractClaims(paragraphText: string): Promise<ClaimExtractionOutput> {
   try {
     const { output } = await generateText({
-      model: registry.languageModel(process.env.AI_MODEL!),
+      model: registry.languageModel(process.env.AI_MODEL! as `anthropic:${string}` | `openai:${string}`),
       output: Output.object({ schema: ClaimExtractionSchema }),
       system: CLAIM_EXTRACTION_SYSTEM_PROMPT,
       prompt: paragraphText,
