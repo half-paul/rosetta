@@ -137,6 +137,7 @@ export const claims = pgTable('claim', {
   confidenceScore: real('confidence_score'), // nullable — per D-05, backward compatible
   charOffsetStart: integer('char_offset_start'), // per D-05
   charOffsetEnd: integer('char_offset_end'), // per D-05
+  explanation: text('explanation'), // per D-10/MOD-11 — reviewer explanation for flagged claim
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
@@ -150,6 +151,7 @@ export const commentaries = pgTable('commentary', {
   draftText: text('draft_text').notNull(),
   status: reviewStatusEnum('status').notNull().default('PENDING'),
   suggestedSources: jsonb('suggested_sources'), // per D-07, stores array of {url, title, relevanceNote, isVerified: false}
+  assignedTo: text('assigned_to').references(() => users.id), // per D-03/MOD-06 — reviewer assignment
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   deletedAt: timestamp('deleted_at', { withTimezone: true }),
@@ -185,5 +187,23 @@ export const scores = pgTable('score', {
   confidenceComponent: integer('confidence_component').notNull().default(0), // per D-12
   scoreWeightsConfig: jsonb('score_weights_config').notNull().default('{"coverage":0.4,"accuracy":0.4,"confidence":0.2}'), // per D-09/SCORE-04
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
+// ---------------------------------------------------------------------------
+// Audit log — append-only (D-11/MOD-08), NO updatedAt, NO deletedAt
+// Records all reviewer actions for immutable traceability (T-04-02, T-04-03)
+// ---------------------------------------------------------------------------
+
+export const auditLog = pgTable('audit_log', {
+  id: text('id').primaryKey().$defaultFn(() => createId()),
+  reviewerId: text('reviewer_id')
+    .notNull()
+    .references(() => users.id),
+  claimId: text('claim_id')
+    .references(() => claims.id, { onDelete: 'cascade' }),
+  action: text('action').notNull(),
+  beforeState: jsonb('before_state'),
+  afterState: jsonb('after_state'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 })
