@@ -1,5 +1,6 @@
 import { PgBoss } from 'pg-boss'
 import { runIngestionJob } from '@/features/ingestion/ingest-worker'
+import { runAnalysisJob } from '@/features/analysis/analysis-worker'
 
 async function startWorkers() {
   if (!process.env.DATABASE_URL) {
@@ -39,8 +40,8 @@ async function startWorkers() {
 
   // Worker registration:
   await boss.work('analysis-jobs', async ([job]) => {
-    console.log(`Processing job ${job.id}`, job.data)
-    // Job handlers will be registered here in Phase 3
+    console.log(`Processing analysis job ${job.id}`, job.data)
+    await runAnalysisJob(job.data as { articleId: string })
   })
 
   console.log('Workers started. Listening for jobs...')
