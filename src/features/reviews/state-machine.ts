@@ -1,4 +1,4 @@
-// Pure module — no 'server-only', no DB imports
+// Pure module — no server deps, no DB imports
 // Single source of truth for review status transitions (D-14, MOD-09)
 
 export type ReviewStatus =
