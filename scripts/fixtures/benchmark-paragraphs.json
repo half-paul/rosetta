@@ -1,0 +1,32 @@
+[
+  {
+    "id": "featured-history",
+    "category": "featured",
+    "source": "Curated from featured article patterns",
+    "paragraphText": "The Treaty of Westphalia, signed in 1648, ended the Thirty Years' War and established the principle of state sovereignty in international relations. The treaty was negotiated in the cities of Osnabrück and Münster and involved representatives from 109 diplomatic delegations."
+  },
+  {
+    "id": "scientific-health",
+    "category": "scientific",
+    "source": "Curated from health/science article patterns",
+    "paragraphText": "Aspirin (acetylsalicylic acid) reduces the risk of heart attack by approximately 25% when taken daily in low doses (75-100mg). The drug works by irreversibly inhibiting the COX-1 enzyme, which prevents the formation of thromboxane A2, a molecule that promotes platelet aggregation."
+  },
+  {
+    "id": "biographical",
+    "category": "biographical",
+    "source": "Curated from biography article patterns",
+    "paragraphText": "Marie Curie was born Maria Sklodowska in Warsaw, Poland, on November 7, 1867. She was the first woman to win a Nobel Prize, the first person to win Nobel Prizes in two different sciences (Physics in 1903 and Chemistry in 1911), and the first woman professor at the University of Paris."
+  },
+  {
+    "id": "stub-minimal",
+    "category": "stub",
+    "source": "Curated from stub article patterns",
+    "paragraphText": "Greenfield Township is a township in Blair County, Pennsylvania, United States. The population was 486 at the 2020 census."
+  },
+  {
+    "id": "opinion-nonfactual",
+    "category": "nonfactual",
+    "source": "Curated paragraph with opinions and definitions only",
+    "paragraphText": "Democracy is generally considered one of the most important political concepts in modern governance. Many scholars believe that democratic systems tend to produce better outcomes for citizens, though this view is not universally held."
+  }
+]

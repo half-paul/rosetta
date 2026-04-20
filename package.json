@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "benchmark": "BENCHMARK_MODE=1 tsx scripts/benchmark.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.71",
