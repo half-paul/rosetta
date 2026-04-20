@@ -471,7 +471,7 @@ for (const provider of PROVIDERS) {
 | A2 | Per-paragraph error handling (continue on LLM failure) is the right granularity for D-03 (empty claims array stored for no-claims paragraphs) | Common Pitfalls | If claim extraction fails vs. returning empty, the distinction matters for analysis worker retry logic |
 | A3 | The `getBoss()` singleton pattern used in other workers is already implemented in `src/jobs/boss.ts` — the ingestion worker and analysis worker can both call it | Code Examples | If `getBoss()` is not implemented, the enqueue-on-completion pattern (D-19) needs a different approach |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Where do score weights live?**
    - What we know: D-09 says "stored as config, not hardcoded". The `scores` table doesn't have a weight config column.
