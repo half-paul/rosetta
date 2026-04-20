@@ -69,8 +69,8 @@ Plans:
 Plans:
 - [x] 03-01-PLAN.md — Schema columns, Zod schemas, Factual Score engine with TDD
 - [x] 03-02-PLAN.md — Claim extractor and commentary drafter LLM modules with unit tests
-- [ ] 03-03-PLAN.md — Analysis worker, ingestion handoff, worker registration, schema push, integration tests
-- [ ] 03-04-PLAN.md — Benchmark harness CLI script with curated fixtures and output validation
+- [x] 03-03-PLAN.md — Analysis worker, ingestion handoff, worker registration, schema push, integration tests
+- [x] 03-04-PLAN.md — Benchmark harness CLI script with curated fixtures and output validation
 
 ### Phase 4: Reviewer Dashboard
 **Goal**: A small team of reviewers can work through a prioritized queue of AI-flagged content, verify sources, approve or reject commentary, and every action is immutably logged — with it being technically impossible to publish without human approval
