@@ -65,7 +65,12 @@ Plans:
   3. A Factual Score (0-100) is computed per article with configurable weights (default: Coverage 40%, Accuracy 40%, Confidence 20%), and unreviewed sections cannot contribute positively to it
   4. The score always displays alongside "X of Y sections reviewed by humans" — these two values are inseparable in the data layer
   5. A benchmark harness can run claim extraction against at least two LLM providers and compare output quality
-**Plans**: TBD
+**Plans:** 4 plans
+Plans:
+- [ ] 03-01-PLAN.md — Schema columns, Zod schemas, Factual Score engine with TDD
+- [ ] 03-02-PLAN.md — Claim extractor and commentary drafter LLM modules with unit tests
+- [ ] 03-03-PLAN.md — Analysis worker, ingestion handoff, worker registration, schema push, integration tests
+- [ ] 03-04-PLAN.md — Benchmark harness CLI script with curated fixtures and output validation
 
 ### Phase 4: Reviewer Dashboard
 **Goal**: A small team of reviewers can work through a prioritized queue of AI-flagged content, verify sources, approve or reject commentary, and every action is immutably logged — with it being technically impossible to publish without human approval
@@ -112,7 +117,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/5 | Gap closure planned | - |
 | 2. Wikipedia Ingestion | 3/3 | Complete | 2026-04-19 |
-| 3. AI Pipeline and Scoring | 0/TBD | Not started | - |
+| 3. AI Pipeline and Scoring | 0/4 | Planned | - |
 | 4. Reviewer Dashboard | 0/TBD | Not started | - |
 | 5. Public Site and Staleness | 0/TBD | Not started | - |
 | 6. Browser Extension | 0/TBD | Not started | - |
