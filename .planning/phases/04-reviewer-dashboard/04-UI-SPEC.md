@@ -1,7 +1,8 @@
 ---
 phase: 4
 slug: reviewer-dashboard
-status: draft
+status: approved
+reviewed_at: 2026-04-19
 shadcn_initialized: true
 preset: base-nova / neutral / cssVariables
 created: 2026-04-19
@@ -141,6 +142,8 @@ Status badge colors:
 
 ### Queue Page (`/dashboard`)
 
+**Focal point:** The severity badge column is the primary visual anchor. HIGH badges (red) draw the eye first, establishing immediate priority scanning left-to-right across each row.
+
 ```
 ┌──────────────────────────────────────────┐
 │ Filter bar: [Search input] [Status ▼] [Severity ▼] [Assignee ▼]  │
@@ -158,6 +161,8 @@ Pagination: paginated (not infinite scroll) — 25 items per page. Rationale: pr
 
 ### Split Pane Review View (`/dashboard/review/[claimId]`)
 
+**Focal point:** The highlighted claim text in the left pane is the primary visual anchor. Inline highlights (using char offsets) are the entry point for the reviewer's attention before reading the AI commentary in the right pane.
+
 ```
 ┌─────────────────────┬─────────────────────┐
 │  LEFT PANE (50%)    │  RIGHT PANE (50%)   │
@@ -166,8 +171,9 @@ Pagination: paginated (not infinite scroll) — 25 items per page. Rationale: pr
 │  highlighted inline │  + Action buttons   │
 │  (char offsets)     │  + Activity feed    │
 │                     │                     │
-│  Text selection     │  [Edit] [Approve]   │
-│  → Flag button      │  [Reject] [Next]    │
+│  Text selection     │  [Edit commentary]  │
+│  → Flag button      │  [Approve] [Reject] │
+│                     │  [Next]             │
 └─────────────────────┴─────────────────────┘
 ```
 
@@ -193,16 +199,16 @@ Both panes use `ScrollArea` for independent scroll. Pane content is full viewpor
 
 ### Inline Commentary Editing (D-08)
 
-- Edit button click: commentary `<p>` becomes `<Textarea>` in-place, no modal
-- Save / Cancel buttons appear below textarea
-- Unsaved changes show a dot indicator on the Edit button label
+- "Edit commentary" button click: commentary `<p>` becomes `<Textarea>` in-place, no modal
+- "Save changes" / "Discard changes" buttons appear below textarea
+- Unsaved changes show a dot indicator on the "Edit commentary" button label
 - On save: optimistic update, revert on API error with `Alert` toast
 
 ### Text Selection Flagging (D-09)
 
 - Reviewer selects text in left pane
 - A floating "Flag" button appears at the selection end point (position: absolute, z-index above content)
-- Click Flag: inline mini form slides down below the paragraph (not modal): severity select + notes textarea + [Submit Flag] button
+- Click Flag: inline mini form slides down below the paragraph (not modal): severity select + notes textarea + [Submit flag] button
 - On submit: new claim appears in right pane immediately (optimistic), paragraph highlight updates
 
 ### Keyboard Shortcuts
@@ -213,7 +219,7 @@ Both panes use `ScrollArea` for independent scroll. Pane content is full viewpor
 | `r` | Reject |
 | `e` | Focus commentary edit textarea |
 | `j` / `k` | Next / previous queue item |
-| `Escape` | Cancel edit / dismiss flag form |
+| `Escape` | Discard changes / dismiss flag form |
 
 Shortcut hints shown as `Tooltip` on hover of each action button.
 
@@ -259,10 +265,10 @@ No third-party registries. All components from shadcn official registry only.
 | Element | Copy | Source |
 |---------|------|--------|
 | Primary CTA (approve) | "Approve commentary" | Default — verb + noun pattern |
-| Secondary CTA (reject) | "Reject" | Default |
-| Edit action | "Edit" | Default |
+| Secondary CTA (reject) | "Reject commentary" | Default — verb + noun pattern |
+| Edit action | "Edit commentary" | Default — verb + noun pattern |
 | Save edit | "Save changes" | Default |
-| Cancel edit | "Cancel" | Default |
+| Cancel edit | "Discard changes" | Default — specific verb + noun, replaces generic "Cancel" |
 | Flag text | "Flag for review" | Default |
 | Submit flag | "Submit flag" | Default |
 | Assign to me | "Assign to me" | Default |
@@ -276,12 +282,12 @@ No third-party registries. All components from shadcn official registry only.
 | Approve blocked tooltip | "Verify all sources before approving" | D-04 |
 | Error: action failed | "Action failed. Check your connection and try again." | Default |
 | Error: invalid transition | "This item can no longer be approved — its state has changed. Refresh to see the latest status." | Default |
-| Reject confirmation | No modal — Reject button triggers direct API call. Rejected items return to PENDING automatically. No confirmation dialog needed (action is reversible). | D-14 |
+| Reject confirmation | No modal — "Reject commentary" button triggers direct API call. Rejected items return to PENDING automatically. No confirmation dialog needed (action is reversible). | D-14 |
 | Activity feed empty | "No activity yet on this claim." | Default |
 | Audit log page heading | "Activity log" | Default |
 
 Destructive actions:
-- **Reject**: No confirmation modal. Rejection returns content to PENDING (reversible). Direct button action is sufficient.
+- **Reject commentary**: No confirmation modal. Rejection returns content to PENDING (reversible). Direct button action is sufficient.
 - **No permanently destructive actions exist in this phase** — PUBLISHED state is the terminal positive state; no delete operations are exposed in the reviewer dashboard UI.
 
 ---
