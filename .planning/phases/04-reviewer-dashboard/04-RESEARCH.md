@@ -819,22 +819,22 @@ if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { st
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Score accuracy rating integration (D-05)**
+1. **Score accuracy rating integration (D-05)** — RESOLVED
    - What we know: `computeAndPersistScore()` takes `accuracyRatings: number[]` but currently passes an empty array (Phase 3 stub). The traffic light values (1.0, 0.5, 0.0) from source ratings feed this array.
    - What's unclear: The score engine computes accuracy as `mean(accuracyRatings) * 100`. This means a commentary with one "Does not support" source (0.0) tanks the accuracy to 0. Is this the intended behavior, or should the rating be per-commentary (average across its sources)?
-   - Recommendation: When the approve action calls `computeAndPersistScore()`, pass the commentary's source ratings as the `accuracyRatings` array for that article's claims. The score engine already handles the math.
+   - Resolution: When the approve action calls `computeAndPersistScore()`, pass the commentary's source ratings as the `accuracyRatings` array for that article's claims. The score engine already handles the math. Per-commentary average is the correct granularity. Implemented in Plan 04-02 (approve action).
 
-2. **Queue item granularity (claim vs commentary)**
+2. **Queue item granularity (claim vs commentary)** — RESOLVED
    - What we know: Each queue item is a commentary (1:1 with a claim). Multiple claims exist per paragraph.
    - What's unclear: The queue is filtered by severity (claim.severity), but the reviewer navigates to `/dashboard/review/[claimId]`. Should the queue show one row per claim, or one row per paragraph (with multiple claims)?
-   - Recommendation: Per the UI-SPEC and D-02, one row per claim. The claim count in the row (`N claims`) refers to other claims in the same paragraph for context.
+   - Resolution: One row per claim, per UI-SPEC and D-02. The claim count in the row (`N claims`) refers to other claims in the same paragraph for context. Implemented in Plan 04-03 (queue page).
 
-3. **`PUBLISHED` transition scope**
+3. **`PUBLISHED` transition scope** — RESOLVED
    - What we know: Phase 4 stops at `HUMAN_APPROVED`. `PUBLISHED` is the terminal state.
    - What's unclear: Does Phase 4 expose any path to `PUBLISHED`, or is that Phase 5?
-   - Recommendation: Phase 4 does NOT set `PUBLISHED`. The approve action sets `HUMAN_APPROVED`. A separate publish mechanism (Phase 5) moves to `PUBLISHED`. The state machine allows the transition but Phase 4 does not expose it.
+   - Resolution: Phase 4 does NOT set `PUBLISHED`. The approve action sets `HUMAN_APPROVED`. A separate publish mechanism (Phase 5) moves to `PUBLISHED`. The state machine allows the transition but Phase 4 does not expose it. Implemented in Plan 04-02 (state machine enforcement).
 
 ---
 
